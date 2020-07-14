@@ -1,0 +1,28 @@
+language: python
+python:
+    - "2.7"
+
+
+sudo: required
+
+addons:
+  apt:
+    packages:
+          - wget
+
+before_install:
+     - command -v wget
+     - command -v curl
+     - wget https://dl.minio.io/client/mc/release/linux-amd64/mc
+     - chmod -R 755 mc
+     - sudo cp -vRf mc /usr/bin
+
+install:
+    - cd ..
+    - git clone https://github.com/Sayo-nika/BraveSail --depth=50
+
+env:
+
+    - SDL_AUDIODRIVER=dummy SDL_VIDEODRIVER=dummy
+
+script:  ls && ./autobuild.sh/autobuild.sh -d BraveSail && ls BraveSail/build 
